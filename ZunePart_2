@@ -1,0 +1,28 @@
+#define ORIGINYEAR 1980 
+BOOL ConvertDays(UINT32 days, SYSTEMTIME* lpTime)
+{
+    int dayofweek, month, year;
+    UINT8 *month_tab;
+
+    //Calculate current day of the week
+    dayofweek = GetDayOfWeek(days);
+
+    year = ORIGINYEAR;
+
+    while (days > 365)
+    {
+        if (IsLeapYear(year))
+        {
+            if (days > 366)
+            {
+                days -= 366;
+                year += 1;
+            }
+        }
+        else
+        {
+            days -= 365;
+            year += 1;
+        }
+    }
+
